@@ -8415,7 +8415,7 @@ endfunction
 "}}}
 " History {{{
 function! s:DB_historyAdd(sql)
-
+  try
     " Record current buffer to return to the correct one
     let s:dbext_prev_winnr = winnr()
     let s:dbext_prev_bufnr = bufnr('%')
@@ -8449,7 +8449,8 @@ function! s:DB_historyAdd(sql)
     " Return to original window
     " exec cur_winnr."wincmd w"
     exec s:dbext_prev_winnr."wincmd w"
-
+  catch
+  endtry
 endfunction
 
 function! s:DB_historyUse(line)
